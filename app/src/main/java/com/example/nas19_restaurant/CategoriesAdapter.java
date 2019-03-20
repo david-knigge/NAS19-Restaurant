@@ -18,6 +18,7 @@ public class CategoriesAdapter extends ArrayAdapter<ArrayList> {
         categories = (ArrayList<String>) objects;
     }
 
+    // Fill category list item with its title
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {

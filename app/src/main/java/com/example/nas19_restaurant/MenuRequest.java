@@ -23,6 +23,7 @@ public class MenuRequest implements Response.Listener<JSONObject>, Response.Erro
         activity.gotMenuError(error.getMessage());
     }
 
+    // On response, extract all items from the response and add them to the MenuItem list.
     @Override
     public void onResponse(JSONObject response) {
         try {
@@ -57,6 +58,7 @@ public class MenuRequest implements Response.Listener<JSONObject>, Response.Erro
         this.context = context;
     }
 
+    // Request a given category.
     public void getMenu(Callback activity, String category) {
         this.activity = activity;
         RequestQueue queue = Volley.newRequestQueue(context);

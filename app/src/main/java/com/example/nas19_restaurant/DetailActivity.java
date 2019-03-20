@@ -20,9 +20,11 @@ public class DetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         MenuItem item = (MenuItem) intent.getSerializableExtra("item");
 
+        setTitle(item.getCategory());
         setItemDetails(item);
     }
 
+    // Set the details of the item passed to this activity.
     private void setItemDetails(MenuItem item) {
         ((TextView) findViewById(R.id.detailItemTitle)).setText(item.getName());
         ((TextView) findViewById(R.id.detailItemDescription)).setText(item.getDescription());

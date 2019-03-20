@@ -17,6 +17,7 @@ public class MenuActivity extends AppCompatActivity implements MenuRequest.Callb
 
     private class onMenuItemClickListener implements AdapterView.OnItemClickListener {
 
+        // When an item is clicked, start a detail activity with it as extra.
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             MenuItem clickedItem = menu.get(position);
@@ -27,6 +28,8 @@ public class MenuActivity extends AppCompatActivity implements MenuRequest.Callb
         }
     }
 
+    // On creation of this activity, request the menu for the category that was passed to this
+    // activity.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +38,10 @@ public class MenuActivity extends AppCompatActivity implements MenuRequest.Callb
         String category = (String) getIntent().getExtras().get("category");
         MenuRequest req = new MenuRequest(this);
         req.getMenu(this, category);
+        setTitle(category);
     }
 
+    // When the menu is returned, add the items on the menu to the listview, set an onclicklistener.
     @Override
     public void gotMenu(ArrayList<MenuItem> menu) {
         this.menu = menu;

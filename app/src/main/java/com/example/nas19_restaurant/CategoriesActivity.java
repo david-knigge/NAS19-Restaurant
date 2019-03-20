@@ -24,17 +24,19 @@ public class CategoriesActivity extends AppCompatActivity implements CategoriesR
         }
     }
 
+    // On creation of the activity, start categories request
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         CategoriesRequest req = new CategoriesRequest(this);
         req.getCategories(this);
+        setTitle("Categories");
     }
 
+    // Set categories adapter, onclick listener
     @Override
     public void gotCategories(ArrayList<String> categories) {
-        Toast.makeText(this, categories.get(0), Toast.LENGTH_LONG).show();
         this.categories = categories;
         ((ListView)findViewById(R.id.categoriesList)).setAdapter(
                 new CategoriesAdapter(this, R.id.categoriesList, categories)
@@ -44,6 +46,7 @@ public class CategoriesActivity extends AppCompatActivity implements CategoriesR
         );
     }
 
+    // Show error
     @Override
     public void gotCategoriesError(String message) {
         Toast.makeText(this, "Failure", Toast.LENGTH_SHORT).show();

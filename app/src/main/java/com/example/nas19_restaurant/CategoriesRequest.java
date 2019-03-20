@@ -19,9 +19,13 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
     private Context context;
     private Callback activity;
 
+    public CategoriesRequest(Context context) {
+        this.context = context;
+    }
+
+    // Add all categories to an arraylist, return it. Pass error to activity on JSONException.
     @Override
     public void onResponse(JSONObject response) {
-
         try {
             JSONArray categories = response.getJSONArray("categories");
             ArrayList<String> extractedCategories = new ArrayList();
@@ -31,10 +35,11 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
             }
             activity.gotCategories(extractedCategories);
         } catch (org.json.JSONException e) {
-
+            activity.gotCategoriesError(e.getMessage());
         }
     }
 
+    // Pass error to activity.
     @Override
     public void onErrorResponse(VolleyError error) {
         activity.gotCategoriesError(error.getMessage());
@@ -45,10 +50,7 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
         void gotCategoriesError(String message);
     }
 
-    public CategoriesRequest(Context context) {
-        this.context = context;
-    }
-
+    // Request the categories
     public void getCategories(Callback activity) {
         this.activity = activity;
         RequestQueue queue = Volley.newRequestQueue(context);
